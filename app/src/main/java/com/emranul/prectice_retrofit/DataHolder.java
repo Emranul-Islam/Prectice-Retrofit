@@ -1,31 +1,22 @@
 package com.emranul.prectice_retrofit;
 
-public class DataHolder {
+import java.util.List;
 
-    private String name;
-    private String address;
+public class DataHolder {
+    private List<DataHolderObject> data;
 
     public DataHolder() {
     }
 
-    public DataHolder(String name, String address) {
-        this.name = name;
-        this.address = address;
+    public DataHolder(List<DataHolderObject> data) {
+        this.data = data;
     }
 
-    public String getName() {
-        return name;
+    public List<DataHolderObject> getData() {
+        return data;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setData(List<DataHolderObject> data) {
+        this.data = data;
     }
 }

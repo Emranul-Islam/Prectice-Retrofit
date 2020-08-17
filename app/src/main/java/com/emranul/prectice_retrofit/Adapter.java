@@ -14,9 +14,9 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private Context context;
-    private List<DataHolder> list;
+    private List<DataHolderObject> list;
 
-    public Adapter(Context context, List<DataHolder> list) {
+    public Adapter(Context context, List<DataHolderObject> list) {
         this.context = context;
         this.list = list;
     }
@@ -31,7 +31,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(list.get(position).getName());
-        holder.address.setText(list.get(position).getAddress());
+        holder.resource.setText(list.get(position).getResource());
+        holder.id.setText(list.get(position).getId());
+        holder.updated_at.setText(list.get(position).getUpdated_at());
 
     }
 
@@ -41,12 +43,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView name, address;
+        private TextView name, resource, id, updated_at;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.raw_name);
-            address = itemView.findViewById(R.id.raw_address);
+            resource = itemView.findViewById(R.id.raw_resource);
+            id = itemView.findViewById(R.id.raw_id);
+            updated_at = itemView.findViewById(R.id.raw_updated_at);
         }
     }
 }

@@ -9,21 +9,36 @@
     app:cardElevation="2dp">
 
     <LinearLayout
+        android:layout_marginStart="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/raw_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp" />
 
         <TextView
             android:id="@+id/raw_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" />
+            android:padding="2dp" />
 
         <TextView
-            android:id="@+id/raw_address"
+            android:id="@+id/raw_resource"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" />
+            android:padding="2dp" />
+
+        <TextView
+            android:id="@+id/raw_updated_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp" />
     </LinearLayout>
 
 

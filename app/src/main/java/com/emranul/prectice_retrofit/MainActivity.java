@@ -18,6 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private final String base_url = "https://cricket.sportmonks.com/api/v2.0/";
+    private final String api_token = "sCrG1y0JVLl04XC2QxP3yieyOTgIAdWo27RHFftu5DIYD4PQy3ReoUkHA9fq";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,27 +31,37 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.npoint.io/")
+                .baseUrl(base_url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        MyRetrofit myRetrofit = retrofit.create(MyRetrofit.class);
+        Clint clint = retrofit.create(Clint.class);
 
-        Call<List<DataHolder>> data = myRetrofit.getData();
+        Call<DataHolder> data = clint.getData(api_token);
 
-        data.enqueue(new Callback<List<DataHolder>>() {
+        data.enqueue(new Callback<DataHolder>() {
             @Override
-            public void onResponse(Call<List<DataHolder>> call, Response<List<DataHolder>> response) {
-                Adapter adapter = new Adapter(MainActivity.this, response.body());
-                adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter);
+            public void onResponse(Call<DataHolder> call, Response<DataHolder> response) {
+                if (response.isSuccessful()) {
+
+                    List<DataHolderObject> list = response.body().getData();
+                    Toast.makeText(MainActivity.this, "Loading....", Toast.LENGTH_SHORT).show();
+                    Adapter adapter = new Adapter(MainActivity.this, list);
+                    adapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapter);
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<DataHolder>> call, Throwable t) {
+            public void onFailure(Call<DataHolder> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
+
     }
 
 }
