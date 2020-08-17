@@ -1,6 +1,7 @@
 package com.emranul.prectice_retrofit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +30,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.name.setText(list.get(position).getName());
         holder.resource.setText(list.get(position).getResource());
         holder.id.setText(list.get(position).getId());
         holder.updated_at.setText(list.get(position).getUpdated_at());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CountryActivity.class);
+                intent.putExtra("continents_id", list.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
